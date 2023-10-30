@@ -16,7 +16,7 @@ def export_enfution(output_path, maps):
 
     export_preset = substance_painter.resource.ResourceID(
         context="your_assets",
-        name="Enfusion MASK"
+        name="Enfusion_template"
     )
     resolution = material.get_resolution()
 
