@@ -6,6 +6,8 @@ import substance_painter.textureset
 import os
 
 plugin_widgets = []
+output_path = ""
+
 
 def export_enfution(output_path, maps):
     if not substance_painter.project.is_open():
@@ -66,7 +68,15 @@ def logX():
     # print(substance_painter)
     # for resource in all_shelf_resources: 
     #     print(resource.identifier().name) 
-    print("The name of the project is now: '{0}'".format(substance_painter.project.name())) 
+    #print("The name of the project is now: '{0}'".format(substance_painter.project.name())) 
+    metadata = substance_painter.project.Metadata("PluginSaveData")
+    metadata.set("plugin_save_data", "testsavedata")
+    
+
+def saveData(path):
+    metadata = substance_painter.project.Metadata("PluginSaveData")
+    metadata.set("plugin_save_data", path)
+    print("Save Data", metadata.get("plugin_save_data"))
 
 def start_plugin():
     # Create a docked widget
@@ -75,12 +85,18 @@ def start_plugin():
     layout = QtWidgets.QVBoxLayout()
     plugin_widget.setLayout(layout)
     plugin_widget.setWindowTitle("Hello Export") 
+    
+    
+    metadata = substance_painter.project.Metadata("PluginSaveData")
+    
     # Add a label with the text "Hello"
     # label = QtWidgets.QLabel("Hello")
 
     # Create an input field for the output path
     output_path_input = QtWidgets.QLineEdit()
     output_path_input.setPlaceholderText("Output Path")
+    output_path_input.setText(metadata.get("plugin_save_data"))
+    output_path_input.textChanged.connect(lambda text = output_path_input.text(): saveData(text))
     
 
     # Create a button to trigger the export
