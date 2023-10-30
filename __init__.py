@@ -86,6 +86,9 @@ def my_callback(*args, **kwargs):
     metadata = substance_painter.project.Metadata("PluginSaveData")
     output_path = metadata.get("plugin_save_data")
     output_path_input.setText(output_path)
+    
+def saveTriggered(*args, **kwargs):
+    print("S A V E")
 
 
 def start_plugin():
@@ -97,6 +100,7 @@ def start_plugin():
     plugin_widget.setWindowTitle("Hello Export") 
     
     substance_painter.event.DISPATCHER.connect(substance_painter.event.ProjectOpened, my_callback)
+    substance_painter.event.DISPATCHER.connect(substance_painter.event.ProjectSaved, saveTriggered)
 
     global output_path_input
     output_path_input = QtWidgets.QLineEdit()
