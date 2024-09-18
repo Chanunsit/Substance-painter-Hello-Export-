@@ -1,4 +1,4 @@
-from PySide2 import QtWidgets, QtGui
+from PySide6 import QtWidgets, QtGui
 import substance_painter.ui
 import substance_painter.export
 import substance_painter.project
